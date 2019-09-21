@@ -1,0 +1,119 @@
+= Weather Service
+Ronaldo Tiou <ronaldotiou@gmail.com>
+v1.0, 2019-09-2§
+:toc:
+:toclevels: 4
+:imagesdir: assets/images
+
+== How to use the application
+=== How to build this application
+==== System requirements
+To be able to build this application, you will need the following programs installed into you computer:
+
+* https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html[Java JDK - Version 11]
+* https://maven.apache.org/download.cgi[Apache Maven]
+* https://www.docker.com/[Docker] (If you want to run the database locally)
+
+After you get this project from GitHub, open any terminal, go to the project root folder and execute the following command:
+
+[source,shell script]
+----
+mvn clean install
+----
+
+=== How to run the application
+==== If you have a Postgres Database
+If you have a Postgres database setup and running and want to use it, you need to change the application configuration.
+
+To do that, you should edit the `application.yml` file into the following folder `src/main/resources/application.yml`. Change the following values with your Postgres information:
+
+[source,shell script]
+----
+password: admin
+username: admin
+url: jdbc:postgresql://localhost:5432/weather
+----
+
+After that build again the application.
+
+==== If you don't have a Postgres Database
+We provide a `docker compose` file with a Postgres image. To run it execute the following steps:
+
+* From the root folder, go to the `docker` folder
+* Into the docker folder, execute the following command:
+[source,shell script]
+----
+docker-compose up -d
+----
+
+Into the root folder execute the following command:
+[source,shell script]
+----
+java -jar target/coding-dojo-spring-boot-0.0.1-SNAPSHOT.jar
+----
+
+=== How to use the application
+To use the application open any browser with the following address:
+[source,shell script]
+----
+http://127.0.0.1:8080/api/weather?city={CITY_NAME}
+----
+
+Replace the `{CITY_NAME}` by the city that you want to know the temperature.
+
+An example of the response:
+[source,json]
+----
+{
+  "id": 2759794,
+  "city": "Amsterdam",
+  "country": "NL",
+  "temperature": 292.09
+}
+----
+
+
+== Architectural Decisions
+* Spring Boot Version upgraded to version 2.1.8.RELEASE
+
+* Create a swagger file to design the Weather Api
+
+* Split the code into layers:
+** Configuration
+** Controller
+** Entity
+** Exception
+** Jpa
+*** Entity
+*** Repository
+** Service
+** Webclient
+
+* Create a InputEntity class
+** Canonical object
+
+* Create a ResponseEntity class
+** Will be the response from Weather Service to the Controller layer
+
+* Create a Weather Service
+** This service will receive the canonical object;
+** Call the 'Open Weather Map' service;
+** Store the result;
+** Return the result to the controller layer.
+    
+* Create a OpenWeatherConfiguration
+** Load the url + appid from application.yml file
+    
+* Create a OpenWeatherWebClient
+** Create a WebClient bean to call the external OpenWeather service.
+
+* Docker folder
+** Into this folder you will find a docker-compose file that you can use to run a local Postgres database.
+
+
+== Dependencies added
+* Spring Actuator
+* H2
+* Lombok
+* Spring Webflux
+* Junit5

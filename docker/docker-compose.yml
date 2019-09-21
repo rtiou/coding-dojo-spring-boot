@@ -1,0 +1,10 @@
+version: "2"
+services:
+  postgresql:
+    image: "postgres:11"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=weather
+    ports:
+      - "5432:5432"

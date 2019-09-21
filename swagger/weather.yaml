@@ -1,0 +1,44 @@
+openapi: "3.0.0"
+
+info:
+  description: Weather Api
+  title: Weather Api
+  version: "1.0.0"
+
+paths:
+  /api/weather:
+    get:
+      tags:
+        - Weather
+      summary: get the weather for a specific city
+      operationId: getWeather
+      parameters:
+        - in: query
+          name: city
+          description: City Name
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful to get the weather
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeatherResponseDto'
+        '404':
+          description: failed to fetch the weather
+
+components:
+  schemas:
+    WeatherResponseDto:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+        city:
+          type: "string"
+        country:
+          type: "string"
+        temperature:
+          type: number
