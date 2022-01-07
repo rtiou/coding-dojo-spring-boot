@@ -24,7 +24,7 @@
         <swagger.codegen.version>3.0.11</swagger.codegen.version>
         <swagger.version>2.0.9</swagger.version>
         <springfox.swagger2.version>2.6.1</springfox.swagger2.version>
-        <h2.version>1.4.199</h2.version>
+        <h2.version>2.0.206</h2.version>
         <junit.jupiter.version>5.5.2</junit.jupiter.version>
         <mockito.version>3.0.0</mockito.version>
     </properties>
