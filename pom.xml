@@ -18,7 +18,7 @@
         <java.version>11</java.version>
         <springfox.swagger2.version>2.9.2</springfox.swagger2.version>
         <swagger.maven.plugin.version>2.0.9</swagger.maven.plugin.version>
-        <postgresql.version>42.2.8</postgresql.version>
+        <postgresql.version>42.2.25</postgresql.version>
         <flyway.core.version>5.2.4</flyway.core.version>
         <lombok.version>1.18.10</lombok.version>
         <swagger.codegen.version>3.0.11</swagger.codegen.version>
